@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SE.Models;
+using System.Reflection.Metadata;
 
 namespace SE.Data
 {
@@ -9,5 +10,10 @@ namespace SE.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DocumentTags>().HasKey(ht => new { ht.documentID, ht.tagID });
+        }
+        public DbSet<Documents> Documents { get; set; }
     }
 }
