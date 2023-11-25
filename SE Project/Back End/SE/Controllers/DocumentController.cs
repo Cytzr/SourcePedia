@@ -116,11 +116,71 @@ namespace SE.Controllers
                 documentID = doctag.documentID,
                 tagID = doctag.tagID
             };
-            _context.DocumentsTag.Add(newDocTag);
+            _context.DocumentsTags.Add(newDocTag);
 
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok("Add Documents Tag Success");
+        }
+
+        [HttpGet]
+        [Route("SearchDocumentsByTagID/{tagID}")]
+        public ActionResult<List<DocumentResponse>> SearchDocumentsByTagID([FromRoute] Guid tagID)
+        {
+            var docList = _context.DocumentsTags
+                .Where(dt => dt.tagID == tagID)
+                .Join(_context.Documents,
+                    dt => dt.documentID,
+                    d => d.documentID,
+                    (dt, d) => new DocumentResponse
+                    {
+                        documentID = d.documentID,
+                        userID = d.userID,
+                        userName = _context.Users.FirstOrDefault(u => u.userID == d.userID).name,
+                        title = d.title,
+                        content = d.content,
+                        publishedTime = d.publishedTime
+                    })
+                .ToList();
+
+            if (docList.Count == 0)
+            {
+                return NotFound("No documents found for the specified tagID");
+            }
+
+            return Ok(docList);
+        }
+
+        [HttpGet]
+        [Route("SearchDocumentsByTags")]
+        public ActionResult<List<DocumentResponse>> SearchDocumentsByTags([FromQuery] List<Guid> tagIDs)
+        {
+            if (tagIDs == null || tagIDs.Count == 0)
+            {
+                return BadRequest("Please provide at least one tagID.");
+            }
+
+            var docList = _context.Documents
+                .Where(d => _context.DocumentsTags
+                    .Where(dt => tagIDs.Contains(dt.tagID) && dt.documentID == d.documentID)
+                    .Count() == tagIDs.Count)
+                .Select(d => new DocumentResponse
+                {
+                    documentID = d.documentID,
+                    userID = d.userID,
+                    userName = (_context.Users.FirstOrDefault(u => u.userID == d.userID)).name,
+                    title = d.title,
+                    content = d.content,
+                    publishedTime = d.publishedTime
+                })
+                .ToList();
+
+            if (docList.Count == 0)
+            {
+                return NotFound("No documents found for the specified tags");
+            }
+
+            return Ok(docList);
         }
 
         // PUT api/<DocumentController>/5

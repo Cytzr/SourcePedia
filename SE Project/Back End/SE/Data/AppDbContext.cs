@@ -25,6 +25,6 @@ namespace SE.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Documents> Documents { get; set; }
-        public DbSet<DocumentsTag> DocumentsTag { get; set; }
+        public DbSet<DocumentsTag> DocumentsTags { get; set; }
     }
 }
