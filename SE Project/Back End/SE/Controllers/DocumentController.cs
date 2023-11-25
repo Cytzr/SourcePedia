@@ -100,23 +100,23 @@ namespace SE.Controllers
             return Ok(newDocument.documentID);
         }
         [HttpPost]
-        [Route("PostDocumentTag/{documentID}-{tagID}")]
-        public async Task<ActionResult> PostDocumentTag([FromRoute] Guid documentID, [FromRoute] Guid tagID)
+        [Route("PostDocumentTag")]
+        public async Task<ActionResult> PostDocumentTag([FromBody] DocumentsTagRequest doctag)
         {
-            if (!(_context.Documents.Any(d => d.documentID == documentID)))
+            if (!(_context.Documents.Any(d => d.documentID == doctag.documentID)))
             {
                 return NotFound("Document Not Found");
             }
-            else if (!(_context.Tags.Any(t => t.tagID == tagID)))
+            else if (!(_context.Tags.Any(t => t.tagID == doctag.tagID)))
             {
                 return NotFound("Tag doesnt exist");
             }
             var newDocTag = new DocumentsTag
             {
-                documentID = documentID,
-                tagID = tagID
+                documentID = doctag.documentID,
+                tagID = doctag.tagID
             };
-            _context.DocumentsTags.Add(newDocTag);
+            _context.DocumentsTag.Add(newDocTag);
 
             await _context.SaveChangesAsync();
 

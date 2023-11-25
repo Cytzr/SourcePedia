@@ -18,7 +18,7 @@ namespace SE.Models
 
         //public ICollection<DocumentTags> DocumentTags { get; set; }
         //public ICollection<Tag> Tags { get; set; }
-        public List<DocumentsTag> DocumentsTags { get; set; }
+        public List<DocumentsTag> DocumentsTag { get; set; }
         public User User { get; set; }
     }
 }

@@ -14,17 +14,17 @@ namespace SE.Data
 
             modelBuilder.Entity<DocumentsTag>()
                 .HasOne(dt => dt.Document)
-                .WithMany(d => d.DocumentsTags)
+                .WithMany(d => d.DocumentsTag)
                 .HasForeignKey(dt => dt.documentID);
 
             modelBuilder.Entity<DocumentsTag>()
                 .HasOne(dt => dt.Tag)
-                .WithMany(t => t.DocumentsTags)
+                .WithMany(t => t.DocumentsTag)
                 .HasForeignKey(dt => dt.tagID);
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Documents> Documents { get; set; }
-        public DbSet<DocumentsTag> DocumentsTags { get; set; }
+        public DbSet<DocumentsTag> DocumentsTag { get; set; }
     }
 }
