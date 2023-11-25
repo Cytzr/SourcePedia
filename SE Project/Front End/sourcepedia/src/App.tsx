@@ -1,6 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { Navbar } from './Components/Navbar';
+import { Login } from './Pages/Login';
+import { Register } from './Pages/Register';
 
 function App() {
   return (
@@ -10,8 +12,8 @@ function App() {
         <Routes>
           <Route path='/' element=''></Route>
           <Route path='/write' element=''></Route>
-          <Route path='/login' element=''></Route>
-          <Route path='/register' element=''></Route>
+          <Route path='/login' element={<Login/>}></Route>
+          <Route path='/register' element={<Register/>}></Route>
           <Route path='/about' element=''></Route>
         </Routes>
       </Router>
