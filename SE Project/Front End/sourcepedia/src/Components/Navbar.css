@@ -32,7 +32,11 @@
     overflow: hidden;
 }
 
+<<<<<<< HEAD
+.nav-input{
+=======
 .navbar-input{
+>>>>>>> efcd9cee12c8906d642fa2e7fd407273f90f1b33
     height: 2.5vh;
     width: 20vw;
     padding: 1vh;
@@ -42,7 +46,11 @@
     background-color: #e7e4dc;
 }
 
+<<<<<<< HEAD
+.nav-input:focus{
+=======
 .navbar-input:focus{
+>>>>>>> efcd9cee12c8906d642fa2e7fd407273f90f1b33
     outline: none;
 }
 

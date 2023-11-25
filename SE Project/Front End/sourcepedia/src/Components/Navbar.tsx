@@ -12,7 +12,11 @@ export const Navbar = () =>{
                 <Link to={'/'}><img className='logo' src={require('../Resources/Sourcepedia.png')} alt="" /></Link>
                 {!(["/"].includes(path)) ? null : <div className='search-bar'>
                     <img className='search-logo' src={require('../Resources/Search.png')} alt="" />
+<<<<<<< HEAD
+                    <input type='text' placeholder='Search' className='nav-input' value={search} onChange={(event)=> setSearch(event.target.value)}></input>
+=======
                     <input className='navbar-input' type='text' placeholder='Search' value={search} onChange={(event)=> setSearch(event.target.value)}></input>
+>>>>>>> efcd9cee12c8906d642fa2e7fd407273f90f1b33
                 </div>}
             </div>
             <div className='right-nav'>
