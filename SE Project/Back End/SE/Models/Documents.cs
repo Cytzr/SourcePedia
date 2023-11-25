@@ -16,8 +16,9 @@ namespace SE.Models
         public string content { get; set; }
         public DateTime publishedTime { get; set; }
 
-        public ICollection<DocumentTags> DocumentTags { get; set; }
-
+        //public ICollection<DocumentTags> DocumentTags { get; set; }
+        //public ICollection<Tag> Tags { get; set; }
+        public List<DocumentsTag> DocumentsTags { get; set; }
         public User User { get; set; }
     }
 }

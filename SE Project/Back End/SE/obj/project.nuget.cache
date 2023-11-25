@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yrwKNfWQzTUehfaDSQtvuyiXlRcdBmG+MjfSlaipl5GyUZzBDFKDD4u6KLzPhgoTmAm4Z4vkcGJb0opTvncv/w==",
+  "dgSpecHash": "7hZa4VgS4mtmbigG4ZFfg4vXNFXBgFhc4bVYulXKdS3vzZX6ZCI1QFuR2BYzZsh/KKogdEEG6+6d/GopLa5GzA==",
   "success": true,
   "projectFilePath": "D:\\Codingan dan Program\\GitFile\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.12\\microsoft.entityframeworkcore.design.7.0.12.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.12\\microsoft.entityframeworkcore.relational.7.0.12.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.12\\microsoft.entityframeworkcore.sqlserver.7.0.12.nupkg.sha512",
+    "C:\\Users\\USER\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.12\\microsoft.entityframeworkcore.tools.7.0.12.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",

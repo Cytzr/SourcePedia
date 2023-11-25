@@ -10,5 +10,7 @@ namespace SE.Models
         public Guid tagID { get; set; }
         [MaxLength(255)]
         public string tagName { get; set; }
+        //public ICollection<Documents> Documents { get; set; }
+        public List<DocumentsTag> DocumentsTags { get; set; }
     }
 }

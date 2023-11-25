@@ -7,13 +7,24 @@ namespace SE.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<Tag> Tags { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DocumentTags>().HasKey(ht => new { ht.documentID, ht.tagID });
+            modelBuilder.Entity<DocumentsTag>()
+                .HasKey(dt => new { dt.documentID, dt.tagID });
+
+            modelBuilder.Entity<DocumentsTag>()
+                .HasOne(dt => dt.Document)
+                .WithMany(d => d.DocumentsTags)
+                .HasForeignKey(dt => dt.documentID);
+
+            modelBuilder.Entity<DocumentsTag>()
+                .HasOne(dt => dt.Tag)
+                .WithMany(t => t.DocumentsTags)
+                .HasForeignKey(dt => dt.tagID);
         }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Documents> Documents { get; set; }
+        public DbSet<DocumentsTag> DocumentsTags { get; set; }
     }
 }

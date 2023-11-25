@@ -14,5 +14,7 @@ namespace SE.Models
         public string email { get; set; }
         [MaxLength(50)]
         public string password { get; set; }
+
+        public ICollection<Documents> Documents { get; set; }
     }
 }
