@@ -17,30 +17,30 @@ export default function Main(){
             tagID: "2",
             tagName: "Technology"
         },
-        // {
-        //     tagID: "3",
-        //     tagName: "Self Improvement"
-        // },
-        // {
-        //     tagID: "2",
-        //     tagName: "Writing"
-        // },
-        // {
-        //     tagID: "3",
-        //     tagName: "Relationship"
-        // },
-        // {
-        //     tagID: "2",
-        //     tagName: "Machine Learning"
-        // },
-        // {
-        //     tagID: "2",
-        //     tagName: "Productivity"
-        // },
-        // {
-        //     tagID: "2",
-        //     tagName: "Politics"
-        // },
+        {
+            tagID: "3",
+            tagName: "Self Improvement"
+        },
+        {
+            tagID: "2",
+            tagName: "Writing"
+        },
+        {
+            tagID: "3",
+            tagName: "Relationship"
+        },
+        {
+            tagID: "2",
+            tagName: "Machine Learning"
+        },
+        {
+            tagID: "2",
+            tagName: "Productivity"
+        },
+        {
+            tagID: "2",
+            tagName: "Politics"
+        },
     ])
     const [postList, SetPostList] = useState([
         {
@@ -92,9 +92,9 @@ export default function Main(){
             </div>
 
             <div className="post-list-div">
-                {postList.map((post, id) => {
+                {postList.map((post) => {
                     return (
-                        <div key={id}>
+                        <div>
                             <p>{post.title}</p>
                             <p>{post.publisedTime}</p>
                         </div>
