@@ -49,21 +49,24 @@ namespace SE.Controllers
 
         // api/user/login
         [HttpPost("login")]
-        public ActionResult Post([FromBody] ValidateUser validateUser)
+        public ActionResult<UserResponse> Post([FromBody] ValidateUser validateUser)
         {
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (_context.Users.Any(x => x.email == validateUser.email && x.password == validateUser.password))
+            var user = _context.Users.FirstOrDefault(u => u.email == validateUser.email && u.password == validateUser.password);
+            if (user == null)
             {
-                return Ok();
+                return NotFound("Email not found or wrong password");
             }
+            return Ok(new UserResponse
+            {
+                userID = user.userID,
+                UserName = user.name
+            });
 
-
-            return NotFound("Email not found or wrong password");
         }
 
     }

@@ -22,13 +22,13 @@ namespace SE.Controllers
         [HttpGet]
         public List<Tag> Get()
         {
-            var userList = _context.Tags
+            var tagList = _context.Tags
                 .Select(x => new Tag
                 {
                     tagID = x.tagID,
                     tagName = x.tagName
                 });
-            return userList.ToList();
+            return tagList.ToList();
         }
 
     }
