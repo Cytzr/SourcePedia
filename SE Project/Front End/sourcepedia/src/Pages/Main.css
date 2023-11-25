@@ -5,7 +5,6 @@
 .main-header {
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
 }
 
 .main-header > div {
@@ -51,14 +50,21 @@
 
 
 
+.post-list-div-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .post-list-div {
-    margin-top: 1rem;
+    margin-top: 2rem;
     background-color: #D9D9D9;
     border-radius: 0.5rem;
     padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    width: 81%;
 }
 
 .post-list-div > div {
@@ -70,6 +76,19 @@
     margin: 0;
 }
 
+.post-list-div-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.post-overview{
+    height: 5rem;
+    margin: 1rem;
+    border-radius: 1rem;
+}
+
 @media (max-width: 48rem) {
     .main-header {
         flex-direction: column;
@@ -78,9 +97,12 @@
     .right-header {
         width: calc(100% - 4rem);
     }
+}
 
+@media (max-width: 70rem){
     .post-list-div {
         margin-top: 0.5rem;
+        width: 100%;
     }
 }
 

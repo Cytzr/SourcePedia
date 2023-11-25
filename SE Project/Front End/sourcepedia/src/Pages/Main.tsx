@@ -69,6 +69,8 @@ export default function Main(){
         },
     ])
 
+    const [selectedTag, setSelectedTag] = useState("");
+
 
     return (
         <div className="main">
@@ -82,7 +84,7 @@ export default function Main(){
                     <div className="tag-list-div">
                         {tagList.map((tag, id) => {
                             return (
-                                <div key={id}>
+                                <div key={id} onClick={()=>setSelectedTag(tag.tagID)}>
                                     {tag.tagName}
                                 </div>
                             )
@@ -91,15 +93,17 @@ export default function Main(){
                 </div>
             </div>
 
-            <div className="post-list-div">
-                {postList.map((post) => {
-                    return (
-                        <div>
-                            <p>{post.title}</p>
-                            <p>{post.publisedTime}</p>
-                        </div>
-                    )
-                })}
+            <div className="post-list-div-container">
+                <div className="post-list-div">
+                    {postList.map((post) => {
+                        return (
+                            <div className="post-overview">
+                                <p>{post.title}</p>
+                                <p>{post.publisedTime}</p>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
 
         </div>
