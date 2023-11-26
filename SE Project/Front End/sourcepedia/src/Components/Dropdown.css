@@ -1,3 +1,7 @@
+.dropdown{
+    display: inline-block;
+}
+
 .dropdown button{
     background-color: white;
     color: black;
@@ -24,9 +28,13 @@
     min-width: 5vw;
     box-shadow: 2px 2px 5px hsla(0, 0, 0, 0.8);
     display: none;
+    cursor: pointer;
 }
 
 .dropdown:hover .content{
     display: block;
 }
 
+.content:hover{
+    background-color: #afa794;
+}
