@@ -21,9 +21,24 @@ namespace SE.Controllers
         }
         // GET: api/<DocumentController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("GetDocument")]
+        public ActionResult<DocumentResponse> Get()
         {
-            return new string[] { "value1", "value2" };
+            var doclist = _context.Documents;
+            if (doclist == null)
+            {
+                return null;
+            }
+            //  doclist.Select(x => new DocumentResponse
+            //   {
+            //      documentID = x.documentID,
+            //       userID = x.userID,
+            //       title = x.title,
+            //       content = x.content,
+            //       publishedTime = x.publishedTime
+            //   });
+
+            return Ok(doclist.ToList());
         }
 
         // GET api/<DocumentController>/5
