@@ -5,6 +5,7 @@
 .main-header {
     display: flex;
     justify-content: space-between;
+    gap: 2rem;
 }
 
 .main-header > div {
@@ -28,8 +29,6 @@
 }
 
 
-
-
 .tag-list-div {
     width: 100%;
     display: flex;
@@ -38,15 +37,67 @@
 }
 
 .tag-list-div > div {
-    background-color: #F2F2F2;
-    padding: 0.4rem 1rem;
-    border-radius: 1rem;
-    cursor: pointer;
+    padding: 0.5rem 0;
 }
 
-.tag-list-div > div:hover {
-    background-color: #dbdbdb;
+.tag-list-div label {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: #F2F2F2;
+    cursor: pointer;
+    border: solid #D9D9D9 0.1rem;
 }
+
+.tag-list-div input {display: none;}
+
+.tag-checkbox:checked + .checkbox-label {
+    border-color: black;
+}
+
+
+/* .tag-list-div {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-list-div label {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: #F2F2F2;
+    cursor: pointer;
+    border: solid white 0.1rem;
+}
+
+.tag-list-div input {display: none;} */
+
+
+/* .tag-list-container {
+    width: calc(80% - 2rem);
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border: solid white 0.1rem;
+}
+
+.tag-list-container label {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: #D9D9D9;
+    cursor: pointer;
+    border: solid white 0.1rem;
+}
+
+.tag-list-container input {display: none;}
+
+.tag-checkbox:checked + .checkbox-label {
+    border-color: black;
+} */
+
+
+
 
 
 

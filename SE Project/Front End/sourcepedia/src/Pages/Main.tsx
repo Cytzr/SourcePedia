@@ -6,41 +6,17 @@ export default function Main(){
     // dummy data
     const [tagList, SetTagList] = useState([
         {
+            tagID: "1",
+            tagName: "Health"
+        },
+        {
             tagID: "2",
-            tagName: "Programming"
+            tagName: "Science"
         },
         {
             tagID: "3",
-            tagName: "Data Science"
-        },
-        {
-            tagID: "2",
             tagName: "Technology"
-        },
-        {
-            tagID: "3",
-            tagName: "Self Improvement"
-        },
-        {
-            tagID: "2",
-            tagName: "Writing"
-        },
-        {
-            tagID: "3",
-            tagName: "Relationship"
-        },
-        {
-            tagID: "2",
-            tagName: "Machine Learning"
-        },
-        {
-            tagID: "2",
-            tagName: "Productivity"
-        },
-        {
-            tagID: "2",
-            tagName: "Politics"
-        },
+        }
     ])
     const [postList, SetPostList] = useState([
         {
@@ -69,8 +45,25 @@ export default function Main(){
         },
     ])
 
-    const [selectedTag, setSelectedTag] = useState("");
+    const [selectedTag, SetSelectedTag] = useState<string[]>([]);
 
+
+
+    const checkBoxChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if(e.target.checked) {
+            SetSelectedTag([...selectedTag, e.target.value])
+        } else {
+            for(let i=0; i<selectedTag.length; i++){
+                if(selectedTag[i] === e.target.value) {
+                    let arr = selectedTag
+                    arr.splice(i, 1)
+                    SetSelectedTag(arr)
+                }
+            }
+        }
+
+    }
 
     return (
         <div className="main">
@@ -84,8 +77,16 @@ export default function Main(){
                     <div className="tag-list-div">
                         {tagList.map((tag, id) => {
                             return (
-                                <div key={id} onClick={()=>setSelectedTag(tag.tagID)}>
-                                    {tag.tagName}
+                                <div key={id}>
+                                    <input type="checkbox" 
+                                        id={tag.tagName} value={tag.tagName} 
+                                        name="tag-list-main-page"
+                                        className="tag-checkbox"
+                                        onChange={checkBoxChecked}
+                                    />
+                                    <label className="checkbox-label" htmlFor={tag.tagName}>
+                                        {tag.tagName}
+                                    </label>
                                 </div>
                             )
                         })}
@@ -95,9 +96,9 @@ export default function Main(){
 
             <div className="post-list-div-container">
                 <div className="post-list-div">
-                    {postList.map((post) => {
+                    {postList.map((post, id) => {
                         return (
-                            <div className="post-overview">
+                            <div className="post-overview" key={id}>
                                 <p>{post.title}</p>
                                 <p>{post.publisedTime}</p>
                             </div>
