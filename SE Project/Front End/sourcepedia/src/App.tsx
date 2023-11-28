@@ -7,6 +7,7 @@ import About from './About/About';
 import Main from './Pages/Main';
 import Write from './Pages/Write';
 import { Dropdown } from './Components/Dropdown';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/about' element={<About/>}></Route>
           <Route path='*' element={<Dropdown/>}></Route>
         </Routes>
+        <Footer />
       </Router>
     </div>
   );
