@@ -25,5 +25,9 @@ export const useLocalStorage = (key:string) =>{
         }
     }
 
+    const clearStorage = () => {
+        window.localStorage.clear();
+    }
+
     return { setItem, getItem, removeItem}
 }

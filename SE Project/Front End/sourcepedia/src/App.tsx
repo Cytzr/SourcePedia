@@ -6,8 +6,8 @@ import { Register } from './Pages/Register';
 import About from './About/About';
 import Main from './Pages/Main';
 import Write from './Pages/Write';
-import { Dropdown } from './Components/Dropdown';
 import Footer from './Components/Footer';
+import { CobaCoba } from './Pages/CobaCoba';
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/about' element={<About/>}></Route>
-          <Route path='*' element={<Dropdown/>}></Route>
+          <Route path='*' element={<CobaCoba/>}></Route>
         </Routes>
         <Footer />
       </Router>

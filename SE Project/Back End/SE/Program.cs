@@ -3,6 +3,19 @@ using SE.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//for CORS
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost/*", "https://localhost/*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
