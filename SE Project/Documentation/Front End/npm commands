@@ -2,3 +2,4 @@ npm install react-router-dom
 npm install @tanstact/react-query
 npm install react-hook-form @hookform/resolvers zod
 npm install axios
+npm install --save @fortawesome/fontawesome-free
