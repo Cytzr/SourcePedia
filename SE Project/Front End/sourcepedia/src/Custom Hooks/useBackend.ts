@@ -1,52 +1,52 @@
 import axios from "axios"
-import { useLocalStorage } from "./useLocalStorage"
 
-// const express = require('express');
+//returns 
+interface LoginProps {
+    email: string,
+    password: string
+}
+export const useLogin = async(props:LoginProps) => {
 
-// const app = express();
-
-// app.use((req:any, res:any, next:any) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     next();
-//   });
-
-export const useLogin = async() => {
-    // const {getItem, setItem} = useLocalStorage("UserCredential");
-
-    const config = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-        }
-      };
-    
-    try{ 
-        const res = await axios.post("https://localhost:7124/api/User/login", {
-            email: 'calvin@gmail.com',
-            password: 'cal'
-        }, config);
-    }
-    catch(error){}
+    const res = await axios.post("https://localhost:7124/api/User/login", {
+        email: props.email,
+        password: props.password
+    });
+    console.log(res);
+    return res.data;
 }
 
 export const useRegister = async() => {
-    try{ 
-        const res = await axios.post("https://localhost:7124/api/User/login", {
-            "username" : "boodie",
-            "email": 'budi@gmail.com',
-            "password": 'budi',
-        });
-    }
-    catch(error){}
+
+    const res = await axios.post("https://localhost:7124/api/User/register", {
+        name : "boodie",
+        email : 'budi@gmail.com',
+        password : 'budi'
+    });
+
+    console.log(res);
+
+    return res;
 }
 
-export const addDocument = () => {
+export const addDocument = async () => {
+    const res = await axios.post("https://localhost:7124/api/Document/PostDocument", {
+        userID: "6DACA139-A3CE-4E96-AB79-93EF89ABCE3D",
+        title: "a title",
+        content: "a content"
+    });
 
+    console.log(res);
+
+    return res;
 }
 
-export const addTag = () => {
-
-}
+//TAG MASIH ERROR BACKEND
+// export const addTag = async () => {
+//     const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
+//         documentID : "",
+//         tagID : ""
+//     })
+// }
 
 export const fetchDocument = async () => {
     const res = await axios.get("https://localhost:7124/api/Document/GetDocument");
@@ -56,6 +56,6 @@ export const fetchDocument = async () => {
 
 export const fetchTag = async () => {
     const res = await axios.get("https://localhost:7124/api/Tag");
-    console.log(res);
+    console.log(res.data);
     return (res);
 }
