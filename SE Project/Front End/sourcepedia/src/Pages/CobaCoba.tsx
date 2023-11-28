@@ -1,4 +1,4 @@
-import { fetchDocument, useLogin } from "../Custom Hooks/useBackend"
+import { fetchDocument, fetchTag, useLogin, useRegister } from "../Custom Hooks/useBackend"
 
 export const CobaCoba = () =>{
     return (
