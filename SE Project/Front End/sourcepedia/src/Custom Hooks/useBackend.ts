@@ -1,61 +1,73 @@
 import axios from "axios"
 
 //returns 
+
 interface LoginProps {
     email: string,
     password: string
 }
-export const useLogin = async(props:LoginProps) => {
 
-    const res = await axios.post("https://localhost:7124/api/User/login", {
-        email: props.email,
-        password: props.password
-    });
-    console.log(res);
-    return res.data;
+interface RegisterProps {
+    name: string,
+    email: string,
+    password: string
 }
 
-export const useRegister = async() => {
+export const useBackend = () => {
 
-    const res = await axios.post("https://localhost:7124/api/User/register", {
-        name : "boodie",
-        email : 'budi@gmail.com',
-        password : 'budi'
-    });
+    const UseLogin = async(props:LoginProps) => {
 
-    console.log(res);
+        const res = await axios.post("https://localhost:7124/api/User/login", {
+            email: props.email,
+            password: props.password
+        });
+        return res.data;
+    }
 
-    return res;
-}
+    const UseRegister = async(props:RegisterProps) => {
 
-export const addDocument = async () => {
-    const res = await axios.post("https://localhost:7124/api/Document/PostDocument", {
-        userID: "6DACA139-A3CE-4E96-AB79-93EF89ABCE3D",
-        title: "a title",
-        content: "a content"
-    });
+        const res = await axios.post("https://localhost:7124/api/User/register", {
+            name : props.name,
+            email : props.email,
+            password : props.password
+        });
 
-    console.log(res);
+        console.log(res);
 
-    return res;
-}
+        return res;
+    }
 
-//TAG MASIH ERROR BACKEND
-// export const addTag = async () => {
-//     const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
-//         documentID : "",
-//         tagID : ""
-//     })
-// }
+    const AddDocument = async () => {
+        const res = await axios.post("https://localhost:7124/api/Document/PostDocument", {
+            userID: "6DACA139-A3CE-4E96-AB79-93EF89ABCE3D",
+            title: "a title",
+            content: "a content"
+        });
 
-export const fetchDocument = async () => {
-    const res = await axios.get("https://localhost:7124/api/Document/GetDocument");
-    console.log(res);
-    return res;
-}
+        console.log(res);
 
-export const fetchTag = async () => {
-    const res = await axios.get("https://localhost:7124/api/Tag");
-    console.log(res.data);
-    return (res);
+        return res;
+    }
+
+    //TAG MASIH ERROR BACKEND
+    // export const addTag = async () => {
+    //     const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
+    //         documentID : "",
+    //         tagID : ""
+    //     })
+    // }
+
+    const FetchDocument = async () => {
+        const res = await axios.get("https://localhost:7124/api/Document/GetDocument");
+        console.log(res);
+        return res;
+    }
+
+    const FetchTag = async () => {
+        const res = await axios.get("https://localhost:7124/api/Tag");
+        console.log(res.data);
+        return (res);
+    }
+
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag};
 }

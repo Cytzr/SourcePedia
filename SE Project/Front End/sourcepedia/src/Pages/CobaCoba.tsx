@@ -1,13 +1,14 @@
-import { useQuery, useMutation } from "@tanstack/react-query"
-import { addDocument, fetchDocument, fetchTag, useLogin, useRegister } from "../Custom Hooks/useBackend"
-import { any } from "zod"
+import { useMutation } from "@tanstack/react-query"
+// import { LoginProps, addDocument, fetchDocument, fetchTag, useLogin, useRegister } from "../Custom Hooks/useBackend"
 
-export const CobaCoba = async () =>{
+export const CobaCoba = () =>{
 
-    const {data} = useMutation({
-        mutationKey:["mutation"],
-        mutationFn: (await useLogin({email:"calvin@gmail.com", password:"calvin"}))
-    })
+    // const {data, mutate} = useMutation({
+    //     mutationKey:["mutation"],
+    //     mutationFn: useLogin({email:"calvin@gmail.com", password:"calvin"})
+    // });
+
+
 
     return (
         <button>coba coba nii</button>
