@@ -6,12 +6,24 @@
     background-color: #D9D9D9;
     border-radius: 1rem;
     padding: 0.5rem 2rem;
-    font-size: 1.3rem;
+    font-size: 0; /* Start with zero font size to hide the text */
+    animation: revealText 0.8s ease-in forwards;
+    transform-origin: top left; /* Set the transform origin to the top left corner */
 }
 
 @media (max-width: 48rem) {
-    .about {padding: 1rem;}
+    .about {
+        padding: 1rem;
+    }
+
     .about > div {
         font-size: 1rem;
+    }
+}
+
+@keyframes revealText {
+    to {
+        font-size: 1.3rem;
+        transform: scaleX(1) scaleY(1); /* Gradually scale to reveal the text */
     }
 }
