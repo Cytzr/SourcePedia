@@ -3,12 +3,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import './Login.css'
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { useBackend } from '../Custom Hooks/useBackend'
+import { useLocalStorage } from '../Custom Hooks/useLocalStorage'
 
 const loginSchema = z.object({
     name: z.string().min(5, "Must be atleast 5 characters"),
     email: z.string().email("Must be an email"),
-    password: z.string().min(5, "Must be atleast 5 characters"),
-    confirmsPassword: z.string().min(5, "Must be atleast 5 characters"),
+    password: z.string().min(3, "Must be atleast 5 characters"),
+    confirmsPassword: z.string().min(3, "Must be atleast 5 characters"),
 }).refine(data => data.password === data.confirmsPassword, {
     message:"Passwords must match",
     path: ["confirmsPassword"],
@@ -18,17 +20,20 @@ export const Register = () =>{
 
     const navs = useNavigate();
 
+    const { UseRegister } = useBackend();
+    const { setItem } = useLocalStorage("UserCredential");
+
     type loginSchemaType = z.infer<typeof loginSchema>
 
-    const onSubmit = (data: loginSchemaType) =>{
-
-        //FETCHING LOGIC HERE
-        //if success
-        console.log(data);
+    const onSubmit = async(data: loginSchemaType) =>{
+        try {
+            const res = await UseRegister({name:data.name, email:data.email, password: data.password});  
+        } catch (error) {
+            alert("Something went wrong");
+            return;
+        }
         reset();
-        navs("/");
-
-        //if failed
+        navs("/login");
     }
 
     const {register, handleSubmit, formState : {isValid, isSubmitted, isSubmitting, errors}, reset} = useForm<loginSchemaType>({resolver:zodResolver(loginSchema)});

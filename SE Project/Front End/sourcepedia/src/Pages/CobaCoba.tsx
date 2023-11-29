@@ -1,9 +1,16 @@
-import { fetchDocument, useLogin } from "../Custom Hooks/useBackend"
+import { useMutation } from "@tanstack/react-query"
+// import { LoginProps, addDocument, fetchDocument, fetchTag, useLogin, useRegister } from "../Custom Hooks/useBackend"
 
 export const CobaCoba = () =>{
+
+    // const {data, mutate} = useMutation({
+    //     mutationKey:["mutation"],
+    //     mutationFn: useLogin({email:"calvin@gmail.com", password:"calvin"})
+    // });
+
+
+
     return (
-        <div>
-            <button onClick={useLogin}>Try Using Backend</button>
-        </div>
+        <button>coba coba nii</button>
     )
 }
