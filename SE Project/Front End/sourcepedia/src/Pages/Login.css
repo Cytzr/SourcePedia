@@ -8,6 +8,9 @@
     width: 30vw;
     border-radius: 4vh;
     padding: 1vw;
+    background-image: url("../Resources/macro-table-books-blur-wallpaper-preview.jpg");
+    background-size: cover;
+    background-position: right;
 }
 
 .login-greeting{
@@ -16,6 +19,7 @@
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    color: white;
 }
 
 .login-greeting h1, .login-greeting p{
