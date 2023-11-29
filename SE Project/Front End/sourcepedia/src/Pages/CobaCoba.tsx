@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-// import { LoginProps, addDocument, fetchDocument, fetchTag, useLogin, useRegister } from "../Custom Hooks/useBackend"
+import { addTag } from "../Custom Hooks/useBackend"
 
 export const CobaCoba = () =>{
 
@@ -11,6 +11,6 @@ export const CobaCoba = () =>{
 
 
     return (
-        <button>coba coba nii</button>
+        <button onClick={() => addTag()}>coba coba nii</button>
     )
 }

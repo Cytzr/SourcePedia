@@ -1,6 +1,7 @@
 import './Navbar.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { Dropdown } from './Dropdown';
 
 export const Navbar = () =>{
     const[search, setSearch] = useState("");
@@ -18,8 +19,9 @@ export const Navbar = () =>{
             <div className='right-nav'>
                 <Link to={'/write'}><img className='write-logo' src={require('../Resources/Write.png')}></img></Link>
                 <Link to={'/about'}><button className='about-us-button nav-button'>About</button></Link>
-                <Link to={'/login'}><button className='login-button nav-button'>Log in</button></Link>
-                <Link to={'/register'}><button className='register-button nav-button'>Register</button></Link>
+
+                {localStorage.getItem("UserCredential") === null ? <><Link to={'/login'}><button className='login-button nav-button'>Log in</button></Link>
+                <Link to={'/register'}><button className='register-button nav-button'>Register</button></Link></> : <Dropdown/>}
             </div>
         </nav>
     )
