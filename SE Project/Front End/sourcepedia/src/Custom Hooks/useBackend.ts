@@ -19,6 +19,11 @@ type AddDocument = {
     content: string
 }
 
+type AddTag = {
+    documentID: string,
+    tagID: string
+}
+
 export const useBackend = () => {
 
     async function UseLogin(props:LoginProps){
@@ -55,11 +60,12 @@ export const useBackend = () => {
         return res;
     }
 
-    async function addTag () {
+    async function AddTag (props:AddTag) {
         const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
-            documentID : "",
-            tagID : ""
-        })
+            documentID : props.documentID,
+            tagID : props.tagID
+        });
+        return res;
     }
 
     async function FetchDocument () {
@@ -74,5 +80,5 @@ export const useBackend = () => {
         return (res);
     }
 
-return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag};
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag};
 }
