@@ -80,5 +80,11 @@ export const useBackend = () => {
         return (res);
     }
 
-return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag};
+    async function FetchDocumentByTag (arr: string[]) {
+        let temp = arr.join("&tagIDs=")
+        const res = await axios.get(`https://localhost:7124/api/Document/SearchDocumentsByTags?tagIDs=${temp}`)
+        return res
+    }
+
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag};
 }
