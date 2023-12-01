@@ -2,20 +2,31 @@ import axios from "axios"
 
 //returns 
 
-interface LoginProps {
+type LoginProps = {
     email: string,
     password: string
 }
 
-interface RegisterProps {
+type RegisterProps = {
     name: string,
     email: string,
     password: string
 }
 
+type AddDocument = {
+    userID: string,
+    title: string,
+    content: string
+}
+
+type AddTag = {
+    documentID: string,
+    tagID: string
+}
+
 export const useBackend = () => {
 
-    const UseLogin = async(props:LoginProps) => {
+    async function UseLogin(props:LoginProps){
 
         const res = await axios.post("https://localhost:7124/api/User/login", {
             email: props.email,
@@ -24,7 +35,7 @@ export const useBackend = () => {
         return res.data;
     }
 
-    const UseRegister = async(props:RegisterProps) => {
+    async function UseRegister(props:RegisterProps) {
 
         const res = await axios.post("https://localhost:7124/api/User/register", {
             name : props.name,
@@ -37,11 +48,11 @@ export const useBackend = () => {
         return res;
     }
 
-    const AddDocument = async () => {
+    async function AddDocument(props:AddDocument){
         const res = await axios.post("https://localhost:7124/api/Document/PostDocument", {
-            userID: "6DACA139-A3CE-4E96-AB79-93EF89ABCE3D",
-            title: "a title",
-            content: "a content"
+            userID: props.userID,
+            title: props.title,
+            content: props.content
         });
 
         console.log(res);
@@ -49,25 +60,31 @@ export const useBackend = () => {
         return res;
     }
 
-    //TAG MASIH ERROR BACKEND
-    // export const addTag = async () => {
-    //     const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
-    //         documentID : "",
-    //         tagID : ""
-    //     })
-    // }
+    async function AddTag (props:AddTag) {
+        const res = await axios.post("https://localhost:7124/api/Document/PostDocumentTag", {
+            documentID : props.documentID,
+            tagID : props.tagID
+        });
+        return res;
+    }
 
-    const FetchDocument = async () => {
+    async function FetchDocument () {
         const res = await axios.get("https://localhost:7124/api/Document/GetDocument");
         console.log(res);
         return res;
     }
 
-    const FetchTag = async () => {
+    async function FetchTag () {
         const res = await axios.get("https://localhost:7124/api/Tag");
         console.log(res.data);
         return (res);
     }
 
-return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag};
+    async function FetchDocumentByTag (arr: string[]) {
+        let temp = arr.join("&tagIDs=")
+        const res = await axios.get(`https://localhost:7124/api/Document/SearchDocumentsByTags?tagIDs=${temp}`)
+        return res
+    }
+
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag};
 }

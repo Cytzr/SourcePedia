@@ -21,7 +21,6 @@ export const Register = () =>{
     const navs = useNavigate();
 
     const { UseRegister } = useBackend();
-    const { setItem } = useLocalStorage("UserCredential");
 
     type loginSchemaType = z.infer<typeof loginSchema>
 

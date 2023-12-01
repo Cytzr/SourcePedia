@@ -25,7 +25,6 @@ export default function Write(){
 
 
     const checkBoxChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
-
         if(e.target.checked) {
             SetTagSelected([...tagSelected, e.target.value])
         } else {
@@ -37,7 +36,6 @@ export default function Write(){
                 }
             }
         }
-
     }
 
     const formSubmitted = (event: React.FormEvent<HTMLFormElement>) => {
