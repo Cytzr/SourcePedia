@@ -1,27 +1,33 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./Write.css"
+import { useBackend } from "../Custom Hooks/useBackend"
+import  axios from "axios"
+
+interface getTag {
+    tagID: string,
+    tagName: string
+}
 
 export default function Write(){
 
-    const [tagList, SetTagList] = useState([
-        {
-            tagID: "1",
-            tagName: "Health"
-        },
-        {
-            tagID: "3",
-            tagName: "Science"
-        },
-        {
-            tagID: "2",
-            tagName: "Technology"
-        },
-    ])
+    const { FetchTag, AddDocument, AddTag } = useBackend()
+
+    const [tagList, SetTagList] = useState<getTag[]>([])
 
     const [title, SetTitle] = useState("") // max 255
     const [tagSelected, SetTagSelected] = useState<string[]>([])
     const [content, SetContent] = useState("") // max 4000
 
+
+    useEffect(() => {
+        const fetchTag = async () => {
+            const res = await FetchTag()
+            SetTagList(res.data)
+        }
+        fetchTag()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
 
     const checkBoxChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +44,32 @@ export default function Write(){
         }
     }
 
-    const formSubmitted = (event: React.FormEvent<HTMLFormElement>) => {
+    const formSubmitted = async (event: React.FormEvent<HTMLFormElement>) => {
+
+        event.preventDefault()
+
         if(tagSelected.length === 0){
             event.preventDefault()
             alert("Please select at least one tag")
-        } else {
-            // send data
+        } else { // send data
+            
+            const sendDocument = await AddDocument({
+                userID: "B1C14FD5-68CB-4181-BC6D-0777BF19D540", // mesti diganti nanti
+                title: title,
+                content: content,
+            })
+
+            const request = tagSelected.map((tag) => AddTag({
+                documentID: sendDocument.data,
+                tagID: tag,
+            }))
+
+            // ngejalanin semua request sekaligus
+            axios.all(request)
+                .then((response) => console.log(response))
+
         }
+
     }
 
     return (
@@ -71,7 +96,7 @@ export default function Write(){
                                     return (
                                         <div key={id}>
                                             <input type="checkbox" 
-                                                id={tag.tagName} value={tag.tagName} 
+                                                id={tag.tagName} value={tag.tagID} 
                                                 name="tag-list-write-page"
                                                 className="tag-checkbox"
                                                 onChange={checkBoxChecked}

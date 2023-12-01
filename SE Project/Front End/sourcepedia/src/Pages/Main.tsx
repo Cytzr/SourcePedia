@@ -32,6 +32,8 @@ export default function Main(){
             SetPostList(docRes.data)
         }
         fetchTagAndDocument()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const checkBoxChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +61,7 @@ export default function Main(){
                 const res = await FetchDocumentByTag(arr)
                 SetPostList(res.data)
             } catch {
-                alert("something went wrong")
+                alert("gada document yg pake tag itu")
             }            
         } else { // gada tag yang dipilih (ngambil semua document)
             const docRes = await FetchDocument()
