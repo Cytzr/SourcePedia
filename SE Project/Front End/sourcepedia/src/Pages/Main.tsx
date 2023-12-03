@@ -105,7 +105,7 @@ export default function Main(){
                         {postList.map((post, id) => {
                             return (
                                 <div  className="post-overview">
-                                    <Link to={`/${post.documentID}`}>
+                                    <Link to={`/read/${post.documentID}`}>
                                         <div key={id}>
                                             <p>{post.title}</p>
                                             <p>{post.publishedTime.slice(0, 10)}</p>

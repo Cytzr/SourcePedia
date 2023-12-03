@@ -1,4 +1,5 @@
 import axios from "axios"
+import { resolve } from "path"
 
 //returns 
 
@@ -88,13 +89,13 @@ export const useBackend = () => {
 
     async function FetchOneDocument (documentID:any) {
         const res = await axios.get(`https://localhost:7124/api/Document/GetDocumentByDocumentID/${documentID}`);
-        // console.log(res.data);
+        // console.log(res);
         return res;
     }
 
-    async function FetchDocumentByUser (userID:string){
+    async function FetchDocumentByUser (userID:any){
         const res = await axios.get(`https://localhost:7124/api/Document/GetDocumentByUserID/${userID}`);
-        console.log(res.data);
+        // console.log(res.data);
         return res;
     }
 

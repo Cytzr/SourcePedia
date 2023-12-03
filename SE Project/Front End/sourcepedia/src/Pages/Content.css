@@ -24,6 +24,10 @@
     font-weight: 700;
 }
 
+.author-name{
+    text-decoration: none;
+}
+
 .content-image{
     width: 50vw;
 }
