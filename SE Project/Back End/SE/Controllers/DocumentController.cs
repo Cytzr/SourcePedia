@@ -199,15 +199,97 @@ namespace SE.Controllers
         }
 
         // PUT api/<DocumentController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<ActionResult> PutAsync([FromBody] UpdateDocumentRequest docReq)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if(!_context.Documents.Any(d => d.documentID == docReq.documentID))
+            {
+                return NotFound("Document not found");
+            }
+
+            if(!_context.Users.Any(u => u.userID == docReq.userID))
+            {
+                return NotFound("User not found");
+            }
+
+            var newDoc = await _context.Documents.FirstOrDefaultAsync(d => d.documentID == docReq.documentID);
+            newDoc.title = docReq.title;
+            newDoc.content = docReq.content;
+            newDoc.publishedTime = DateTime.Now;
+            
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
 
-        // DELETE api/<DocumentController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        //public async Task<ActionResult<object>> PostDocument([FromBody] DocumentRequest documents)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    if (!(_context.Users.Any(u => u.userID == documents.userID)))
+        //    {
+        //        return NotFound("There is no such user");
+        //    }
+        //    var newDocument = new Documents
+        //    {
+        //        documentID = Guid.NewGuid(),
+        //        userID = documents.userID,
+        //        title = documents.title,
+        //        content = documents.content,
+        //        publishedTime = DateTime.Now
+        //    };
+
+        //    _context.Documents.Add(newDocument);
+
+        //    await _context.SaveChangesAsync();
+
+        //    return Ok(newDocument.documentID);
+        //}
+
+
+
+        [HttpDelete("DocumentTag/{id}")]
+        public ActionResult DeleteDocumentTag(Guid id)
         {
+            var docList = _context.DocumentsTags.Where(x => x.documentID == id).ToList();
+            if (docList.Count == 0)
+            {
+                return NotFound("Document not found");
+            }
+
+            foreach(var doc in docList)
+            {
+                _context.DocumentsTags.Remove(doc);
+            }
+            _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
+
+
+
+        [HttpDelete("Document/{id}")]
+        public async Task<IActionResult> DeleteDocumentAsync(Guid id)
+        {
+            var doc = await _context.Documents.FirstOrDefaultAsync(x => x.documentID.Equals(id));
+            if (doc == null)
+            {
+                return NotFound("Document not found");
+            }
+
+            _context.Documents.Remove(doc);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }
