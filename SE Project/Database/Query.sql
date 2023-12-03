@@ -16,10 +16,11 @@ CREATE TABLE Documents(
 
 CREATE TABLE Tags(
     tagID uniqueidentifier PRIMARY KEY,
-	tagName VARCHAR(255)
+	tagName VARCHAR(255),
+	tagImage VARCHAR(500)
 );
 
-CREATE TABLE DocumentTags(
+CREATE TABLE DocumentsTag(
     documentID uniqueidentifier,
 	tagID uniqueidentifier,
 	PRIMARY KEY (documentID, tagID),
@@ -48,14 +49,14 @@ INNER JOIN Documents as d
 ON u.userID = d.userID
 */
 
-INSERT INTO Tags(tagID, tagName)
-VALUES(NEWID(), 'Health'),
-(NEWID(), 'Tech'),
-(NEWID(), 'Lifestyle')
+INSERT INTO Tags(tagID, tagName, tagImage)
+VALUES(NEWID(), 'Health', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtqtgMhV3caIO87DflnP3GskvwiUMr0uBp1A&usqp=CAU'),
+(NEWID(), 'Tech', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6RHhJvsXrK_WJZIs9mxwfIHHB9nLsjKCQUo2HT9_S8tVgNv7SV5aYw-2PBOjGTVuSV48&usqp=CAU'),
+(NEWID(), 'Science', 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3432204/erlenmeyer-icon-md.png')
 
 --SELECT * FROM Tags
 
-INSERT INTO DocumentTags(documentID, tagID)
+INSERT INTO DocumentsTag(documentID, tagID)
 VALUES((SELECT d.documentID 
 FROM Documents as d
 INNER JOIN Users as u 
@@ -88,4 +89,4 @@ WHERE u.name = 'jonathan'),(SELECT tagID
 FROM Tags
 WHERE tagName = 'Tech'))
 
---SELECT * FROM DocumentTags
+--SELECT * FROM DocumentsTag

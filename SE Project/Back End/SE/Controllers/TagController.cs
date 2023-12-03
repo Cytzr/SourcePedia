@@ -26,7 +26,8 @@ namespace SE.Controllers
                 .Select(x => new Tag
                 {
                     tagID = x.tagID,
-                    tagName = x.tagName
+                    tagName = x.tagName,
+                    tagImage = x.tagImage,
                 });
             return tagList.ToList();
         }
