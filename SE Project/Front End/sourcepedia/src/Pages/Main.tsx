@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import "./Main.css"
 import { useBackend } from "../Custom Hooks/useBackend"
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Content } from "./Content"
 
 interface getTag {
     tagID: string,
@@ -61,7 +63,7 @@ export default function Main(){
                 const res = await FetchDocumentByTag(arr)
                 SetPostList(res.data)
             } catch {
-                alert("gada document yg pake tag itu")
+                alert("No Available with designated tag")
             }            
         } else { // gada tag yang dipilih (ngambil semua document)
             const docRes = await FetchDocument()
@@ -100,14 +102,18 @@ export default function Main(){
 
             <div className="post-list-div-container">
                 <div className="post-list-div">
-                    {postList.map((post, id) => {
-                        return (
-                            <div className="post-overview" key={id}>
-                                <p>{post.title}</p>
-                                <p>{post.publishedTime.slice(0, 10)}</p>
-                            </div>
-                        )
-                    })}
+                        {postList.map((post, id) => {
+                            return (
+                                <div  className="post-overview">
+                                    <Link to={`/${post.documentID}`}>
+                                        <div key={id}>
+                                            <p>{post.title}</p>
+                                            <p>{post.publishedTime.slice(0, 10)}</p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            )
+                        })}
                 </div>
             </div>
 

@@ -8,6 +8,7 @@ import Main from './Pages/Main';
 import Write from './Pages/Write';
 import Footer from './Components/Footer';
 import { CobaCoba } from './Pages/CobaCoba';
+import { Content } from './Pages/Content';
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Route path='/login' element={<Login/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/about' element={<About/>}></Route>
-          <Route path='*' element={<CobaCoba/>}></Route>
+          <Route path='/:documentID' element={<Content/>}></Route>
+          <Route path='*' element={<Content/>}></Route>
         </Routes>
         <Footer />
       </Router>
