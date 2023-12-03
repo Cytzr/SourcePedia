@@ -81,10 +81,22 @@ export const useBackend = () => {
     }
 
     async function FetchDocumentByTag (arr: string[]) {
-        let temp = arr.join("&tagIDs=")
-        const res = await axios.get(`https://localhost:7124/api/Document/SearchDocumentsByTags?tagIDs=${temp}`)
-        return res
+        let temp = arr.join("&tagIDs=");
+        const res = await axios.get(`https://localhost:7124/api/Document/SearchDocumentsByTags?tagIDs=${temp}`);
+        return res;
     }
 
-return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag};
-}
+    async function FetchOneDocument (documentID:any) {
+        const res = await axios.get(`https://localhost:7124/api/Document/GetDocumentByDocumentID/${documentID}`);
+        // console.log(res.data);
+        return res;
+    }
+
+    async function FetchDocumentByUser (userID:string){
+        const res = await axios.get(`https://localhost:7124/api/Document/GetDocumentByUserID/${userID}`);
+        console.log(res.data);
+        return res;
+    }
+
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag, FetchOneDocument, FetchDocumentByUser};
+}   

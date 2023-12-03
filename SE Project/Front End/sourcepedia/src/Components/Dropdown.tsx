@@ -3,7 +3,7 @@ import './Dropdown.css'
 
 export const Dropdown = () =>{
     const UserCredential = JSON.parse(localStorage.getItem("UserCredential") || "");
-    console.log(UserCredential.userName);
+    // console.log(UserCredential.userName);
 
     return(
     <div className='dropdown'>

@@ -1,13 +1,27 @@
 import { useParams } from 'react-router-dom'
 import './Content.css'
+import { useBackend } from '../Custom Hooks/useBackend';
+
+type getDoc = {
+    content: string,
+    documentID: string,
+    publishedTime: string,
+    title: string,
+    userID: string,
+}
 
 export const Content = () =>{
     const { documentID } = useParams<string>();
-    //fetch document berdasarkan document id baru bisa dipake datanya
+
+    const { FetchOneDocument } = useBackend();
+
+    const res = FetchOneDocument(documentID);
+    console.log(res);
+
     return (
         <div className='content-container'>
             <div className='header'>
-                <div className='content-title'>Deploying an application in react and asp.net</div>
+                <div className='content-title'>{}</div>
                 <div className="published-time">Published on: 01-02-2023</div>
                 <div className="author-name">by Kelvin Ethanael Yahja</div>
             </div>
