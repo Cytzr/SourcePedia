@@ -230,7 +230,7 @@ namespace SE.Controllers
         }
                 ).ToList();
 
-            if (docList.Count() == 0)
+            if (docList.Count == 0)
             {
                 return NotFound("No documents found for the specified tags");
             }
