@@ -142,21 +142,46 @@ namespace SE.Controllers
         [Route("SearchDocumentsByTagID/{tagID}")]
         public ActionResult<List<DocumentResponse>> SearchDocumentsByTagID([FromRoute] Guid tagID)
         {
+            //var docList = _context.DocumentsTags
+            //    .Where(dt => dt.tagID == tagID)
+            //    .Join(_context.Documents,
+            //        dt => dt.documentID,
+            //        d => d.documentID,
+            //        (dt, d) => new DocumentResponse
+            //        {
+            //            documentID = d.documentID,
+            //            userID = d.userID,
+            //            userName = _context.Users.FirstOrDefault(u => u.userID == d.userID).name,
+            //            title = d.title,
+            //            content = d.content,
+            //            publishedTime = d.publishedTime
+            //        })
+            //    .ToList();
+
             var docList = _context.DocumentsTags
                 .Where(dt => dt.tagID == tagID)
                 .Join(_context.Documents,
                     dt => dt.documentID,
                     d => d.documentID,
-                    (dt, d) => new DocumentResponse
+                    (DT, D) => new {DT, D}
+                )
+                .Join(_context.Tags,
+                    DTAndD  => DTAndD.DT.tagID,
+                    t => t.tagID,
+                    (DTAndD, t) => new DocumentTagResponse
                     {
-                        documentID = d.documentID,
-                        userID = d.userID,
-                        userName = _context.Users.FirstOrDefault(u => u.userID == d.userID).name,
-                        title = d.title,
-                        content = d.content,
-                        publishedTime = d.publishedTime
-                    })
-                .ToList();
+                        documentID = DTAndD.DT.documentID,
+                        userID = DTAndD.D.userID,
+                        title = DTAndD.D.title,
+                        content = DTAndD.D.content,
+                        publishedTime = DTAndD.D.publishedTime,
+                        tagID = t.tagID,
+                        tagName = t.tagName,
+                        tagImage = t.tagImage,
+
+                    }
+                 ).ToList();
+
 
             if (docList.Count == 0)
             {
