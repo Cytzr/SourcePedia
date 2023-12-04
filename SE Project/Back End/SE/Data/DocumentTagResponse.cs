@@ -1,4 +1,6 @@
-﻿namespace SE.Data
+﻿using SE.Models;
+
+namespace SE.Data
 {
     public class DocumentTagResponse
     {
@@ -7,8 +9,6 @@
         public string title { get; set; }
         public string content { get; set; }
         public DateTime publishedTime { get; set; }
-        public Guid tagID { get; set; }
-        public string tagName { get; set; }
-        public string tagImage { get; set; }
+        public List<Tag> tag { get; set; }
     }
 }

@@ -163,24 +163,27 @@ namespace SE.Controllers
                 .Join(_context.Documents,
                     dt => dt.documentID,
                     d => d.documentID,
-                    (DT, D) => new {DT, D}
-                )
-                .Join(_context.Tags,
-                    DTAndD  => DTAndD.DT.tagID,
-                    t => t.tagID,
-                    (DTAndD, t) => new DocumentTagResponse
+                    (dt, d) => new DocumentTagResponse
                     {
-                        documentID = DTAndD.DT.documentID,
-                        userID = DTAndD.D.userID,
-                        title = DTAndD.D.title,
-                        content = DTAndD.D.content,
-                        publishedTime = DTAndD.D.publishedTime,
-                        tagID = t.tagID,
-                        tagName = t.tagName,
-                        tagImage = t.tagImage,
-
+                        documentID = d.documentID,
+                        userID = d.userID,
+                        title = d.title,
+                        content = d.content,
+                        publishedTime = d.publishedTime,
+                        tag = _context.DocumentsTags.Where(DT => DT.documentID == d.documentID)
+                            .Join(
+                                _context.Tags,
+                                dt => dt.tagID,
+                                t => t.tagID,
+                                (dt, t) => new Tag
+                                {
+                                    tagID = t.tagID,
+                                    tagName = t.tagName,
+                                    tagImage = t.tagImage
+                                }
+                            ).ToList()
                     }
-                 ).ToList();
+                ).ToList();
 
 
             if (docList.Count == 0)
@@ -204,18 +207,30 @@ namespace SE.Controllers
                 .Where(d => _context.DocumentsTags
                     .Where(dt => tagIDs.Contains(dt.tagID) && dt.documentID == d.documentID)
                     .Count() == tagIDs.Count)
-                .Select(d => new DocumentResponse
+                .Select(a => new DocumentTagResponse
                 {
-                    documentID = d.documentID,
-                    userID = d.userID,
-                    userName = (_context.Users.FirstOrDefault(u => u.userID == d.userID)).name,
-                    title = d.title,
-                    content = d.content,
-                    publishedTime = d.publishedTime
-                })
-                .ToList();
+                    documentID = a.documentID,
+                    userID = a.userID,
+                    title = a.title,
+                    content = a.content,
+                    publishedTime = a.publishedTime,
+                    tag = _context.DocumentsTags
+                        .Where(dt => dt.documentID == a.documentID)
+                        .Join(
+                            _context.Tags,
+                            dt => dt.tagID,
+                            t => t.tagID,
+                            (dt, t) => new Tag
+                            {
+                                tagID = t.tagID,
+                                tagName = t.tagName,
+                                tagImage = t.tagImage
+                            }
+                        ).ToList()
+        }
+                ).ToList();
 
-            if (docList.Count == 0)
+            if (docList.Count() == 0)
             {
                 return NotFound("No documents found for the specified tags");
             }
