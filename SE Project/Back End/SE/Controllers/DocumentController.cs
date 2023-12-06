@@ -24,20 +24,25 @@ namespace SE.Controllers
         [Route("GetDocument")]
         public ActionResult<DocumentResponse> Get()
         {
-            var doclist = _context.Documents;
+            var doclist = _context.Documents
+                .Join(_context.Users,
+                    d => d.userID,
+                    u => u.userID,
+                    (d, u) => new DocumentResponse
+                    {
+                        documentID = d.documentID,
+                        userID = d.userID,
+                        userName = u.name,
+                        title = d.title,
+                        content = d.content,
+                        publishedTime = d.publishedTime
+                    }
+                );
             if (doclist == null)
             {
                 return NotFound("There is no document");
             }
-            var documentResponses = doclist.Select(x => new DocumentResponse
-            {
-                documentID = x.documentID,
-                userID = x.userID,
-                title = x.title,
-                content = x.content,
-                publishedTime = x.publishedTime
-            });
-            return Ok(documentResponses.ToList());
+            return Ok(doclist.ToList());
         }
 
         // GET api/<DocumentController>/5
