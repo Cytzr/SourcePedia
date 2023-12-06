@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react"
 import "./Main.css"
 import { useBackend } from "../Custom Hooks/useBackend"
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { Content } from "./Content"
+
+import img1 from "../Resources/img1.jpg"
+import img2 from "../Resources/img2.jpg"
+import img3 from "../Resources/img3.jpg"
+import img4 from "../Resources/img4.jpg"
+import img5 from "../Resources/img5.jpg"
 
 interface getTag {
     tagID: string,
@@ -17,7 +23,9 @@ interface getDoc {
     userID: string,
 }
 
-export default function Main(){
+export default function Main() {
+
+    const navigate = useNavigate()
 
     const { FetchTag, FetchDocument, FetchDocumentByTag } = useBackend()
 
@@ -40,12 +48,12 @@ export default function Main(){
 
     const checkBoxChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
         let res: string[] = [];
-        if(e.target.checked) { // ada yang di click
+        if (e.target.checked) { // ada yang di click
             SetSelectedTag([...selectedTag, e.target.value])
             res = [...selectedTag, e.target.value]
         } else { // ada yang di un-click
-            for(let i=0; i<selectedTag.length; i++){
-                if(selectedTag[i] === e.target.value) {
+            for (let i = 0; i < selectedTag.length; i++) {
+                if (selectedTag[i] === e.target.value) {
                     let arr = selectedTag
                     arr.splice(i, 1)
                     SetSelectedTag(arr)
@@ -58,18 +66,18 @@ export default function Main(){
 
     const fetchByTag = async (arr: string[]) => {
 
-        if(arr.length > 0) { // ada tag yang dipilih
+        if (arr.length > 0) { // ada tag yang dipilih
             try {
                 const res = await FetchDocumentByTag(arr)
                 SetPostList(res.data)
             } catch {
                 alert("No Available with designated tag")
-            }            
+            }
         } else { // gada tag yang dipilih (ngambil semua document)
             const docRes = await FetchDocument()
             SetPostList(docRes.data)
         }
-        
+
     }
 
     return (
@@ -84,8 +92,8 @@ export default function Main(){
                         {tagList.map((tag, id) => {
                             return (
                                 <div key={id}>
-                                    <input type="checkbox" 
-                                        id={tag.tagName} value={tag.tagID} 
+                                    <input type="checkbox"
+                                        id={tag.tagName} value={tag.tagID}
                                         name="tag-list-main-page"
                                         className="tag-checkbox"
                                         onChange={checkBoxChecked}
@@ -102,18 +110,24 @@ export default function Main(){
 
             <div className="post-list-div-container">
                 <div className="post-list-div">
-                        {postList.map((post, id) => {
-                            return (
-                                <div  className="post-overview">
-                                    <Link to={`/read/${post.documentID}`}>
-                                        <div key={id}>
-                                            <p>{post.title}</p>
-                                            <p>{post.publishedTime.slice(0, 10)}</p>
-                                        </div>
-                                    </Link>
+                    {postList.map((post, id) => {
+                        return (
+                            <div className="post-overview" onClick={() => navigate(`/read/${post.documentID}`)}>
+                                <div key={id}>
+                                    {id % 5 === 0 && <img src={img1} alt="" />}
+                                    {id % 5 === 1 && <img src={img2} alt="" />}
+                                    {id % 5 === 2 && <img src={img3} alt="" />}
+                                    {id % 5 === 3 && <img src={img4} alt="" />}
+                                    {id % 5 === 4 && <img src={img5} alt="" />}
+                                    <div className="post-text">
+                                        <p className="post-title">{post.title}</p>
+                                        <p className="post-content">{post.content}</p>
+                                        <p className="post-published-time">{post.publishedTime.slice(0, 10)}</p>
+                                    </div>
                                 </div>
-                            )
-                        })}
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
 
