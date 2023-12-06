@@ -3319,19 +3319,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kwnti\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj",
+      "projectUniqueName": "D:\\Codingan dan Program\\GitFile\\Sourcepedia\\SE Project\\Back End\\SE\\SE.csproj",
       "projectName": "SE",
-      "projectPath": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj",
-      "packagesPath": "C:\\Users\\kwnti\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\obj\\",
+      "projectPath": "D:\\Codingan dan Program\\GitFile\\Sourcepedia\\SE Project\\Back End\\SE\\SE.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "D:\\Codingan dan Program\\GitFile\\Sourcepedia\\SE Project\\Back End\\SE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kwnti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3401,7 +3401,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

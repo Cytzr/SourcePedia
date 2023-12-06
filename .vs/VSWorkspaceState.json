@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SE Project",
+    "\\SE Project\\Back End",
+    "\\SE Project\\Back End\\SE",
+    "\\SE Project\\Back End\\SE\\Controllers",
+    "\\SE Project\\Back End\\SE\\Models"
   ],
+  "SelectedNode": "\\SE Project\\Back End\\SE\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

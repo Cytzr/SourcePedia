@@ -27,18 +27,17 @@ namespace SE.Controllers
             var doclist = _context.Documents;
             if (doclist == null)
             {
-                return null;
+                return NotFound("There is no document");
             }
-            //  doclist.Select(x => new DocumentResponse
-            //   {
-            //      documentID = x.documentID,
-            //       userID = x.userID,
-            //       title = x.title,
-            //       content = x.content,
-            //       publishedTime = x.publishedTime
-            //   });
-
-            return Ok(doclist.ToList());
+            var documentResponses = doclist.Select(x => new DocumentResponse
+            {
+                documentID = x.documentID,
+                userID = x.userID,
+                title = x.title,
+                content = x.content,
+                publishedTime = x.publishedTime
+            });
+            return Ok(documentResponses.ToList());
         }
 
         // GET api/<DocumentController>/5
@@ -296,7 +295,7 @@ namespace SE.Controllers
 
 
         [HttpDelete("DocumentTag/{id}")]
-        public ActionResult DeleteDocumentTag(Guid id)
+        public async Task<ActionResult> DeleteDocumentTag(Guid id)
         {
             var docList = _context.DocumentsTags.Where(x => x.documentID == id).ToList();
             if (docList.Count == 0)
@@ -304,17 +303,14 @@ namespace SE.Controllers
                 return NotFound("Document not found");
             }
 
-            foreach(var doc in docList)
+            foreach (var doc in docList)
             {
                 _context.DocumentsTags.Remove(doc);
             }
-            _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }
-
-
-
 
 
         [HttpDelete("Document/{id}")]
