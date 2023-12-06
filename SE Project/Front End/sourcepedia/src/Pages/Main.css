@@ -135,9 +135,49 @@
 }
 
 .post-overview{
-    height: 5rem;
+    height: 10rem;
     margin: 1rem;
     border-radius: 1rem;
+}
+
+.post-overview-link {
+    text-decoration: none;
+    color: black;
+}
+
+.post-overview img {
+    width: 10rem;
+    height: 10rem;
+    object-fit: cover;
+    /* background-color: black; */
+}
+
+.post-overview > div {
+    display: flex;
+}
+
+.post-text {
+    padding-left: 2rem;
+    width: calc(100% - 10rem - 2rem);
+    position: relative;
+}
+
+.post-title {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.post-content {
+    display: -webkit-box;
+    /* max-width: 200px; */
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-published-time {
+    position: absolute;
+    bottom: 0;
 }
 
 @media (max-width: 48rem) {

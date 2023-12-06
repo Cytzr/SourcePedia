@@ -60,7 +60,7 @@ export const Login = () =>{
                         {errors.password && (<p>{`${errors.password.message}`}</p>)}
                     </div>
                     <div className='button-borders'>
-                        <button className="sign-in-button" type="submit" disabled={isSubmitting}><p className='text'>Sign Up</p></button>
+                        <button className="sign-in-button" type="submit" disabled={isSubmitting}><p className='text'>Log in</p></button>
                     </div>
                 </form>
             </div>
