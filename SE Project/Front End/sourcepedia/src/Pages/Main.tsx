@@ -112,7 +112,7 @@ export default function Main() {
                 <div className="post-list-div">
                     {postList.map((post, id) => {
                         return (
-                            <div className="post-overview" onClick={() => navigate(`/read/${post.documentID}`)}>
+                            <div className="post-overview" onClick={() => navigate(`/read/${post.documentID}/${id}`)}>
                                 <div key={id}>
                                     {id % 5 === 0 && <img src={img1} alt="" />}
                                     {id % 5 === 1 && <img src={img2} alt="" />}

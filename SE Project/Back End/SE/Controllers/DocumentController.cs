@@ -21,6 +21,39 @@ namespace SE.Controllers
         }
         // GET: api/<DocumentController>
         [HttpGet]
+        [Route("GetAllDocument")]
+        public ActionResult<DocumentResponse> GetAllDocument()
+        {
+            var docList = _context.Users
+                        .SelectMany(u => u.Documents
+                            .SelectMany(d => d.DocumentsTag
+                                .Select(dt => new DocumentResponse
+                                {
+                                    userID = u.userID,
+                                    userName = u.name,
+                                    documentID = d.documentID,
+                                    title = d.title,
+                                    content = d.content,
+                                    publishedTime = d.publishedTime,
+                                    tag = d.DocumentsTag
+                                    .Select(dt => new TagResponse
+                                    {
+                                        tagName = dt.Tag.tagName,
+                                        tagID = dt.Tag.tagID,
+                                        tagImage = dt.Tag.tagImage
+                                    }).ToList()
+                                })
+                            )
+                        );
+            if (docList == null)
+            {
+                return NotFound("There is no document");
+            }
+            return Ok(docList.ToList());
+        }
+
+        //ini yang mungkin diganti
+        [HttpGet]
         [Route("GetDocument")]
         public ActionResult<DocumentResponse> Get()
         {
