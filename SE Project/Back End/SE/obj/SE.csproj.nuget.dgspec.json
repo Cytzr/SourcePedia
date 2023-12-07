@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Codingan dan program\\GitFile\\Sourcepdia\\SE Project\\Back End\\SE\\SE.csproj": {}
+    "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj": {}
   },
   "projects": {
-    "D:\\Codingan dan program\\GitFile\\Sourcepdia\\SE Project\\Back End\\SE\\SE.csproj": {
+    "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Codingan dan program\\GitFile\\Sourcepdia\\SE Project\\Back End\\SE\\SE.csproj",
+        "projectUniqueName": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj",
         "projectName": "SE",
-        "projectPath": "D:\\Codingan dan program\\GitFile\\Sourcepdia\\SE Project\\Back End\\SE\\SE.csproj",
-        "packagesPath": "C:\\Users\\Jason W\\.nuget\\packages\\",
-        "outputPath": "D:\\Codingan dan program\\GitFile\\Sourcepdia\\SE Project\\Back End\\SE\\obj\\",
+        "projectPath": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\SE.csproj",
+        "packagesPath": "C:\\Users\\kwnti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kwnti\\OneDrive\\Desktop\\se\\SourcePedia\\SE Project\\Back End\\SE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jason W\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kwnti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

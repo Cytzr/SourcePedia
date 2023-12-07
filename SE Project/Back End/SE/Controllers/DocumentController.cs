@@ -105,7 +105,19 @@ namespace SE.Controllers
                 userName = user.name,
                 title = doc.title,
                 content = doc.content,
-                publishedTime = doc.publishedTime
+                publishedTime = doc.publishedTime,
+                tag = _context.DocumentsTags
+                    .Where(dt => dt.documentID == doc.documentID)
+                    .Join(
+                        _context.Tags,
+                        dt => dt.tagID,
+                        t => t.tagID,
+                        (dt, t) => new TagResponse
+                        {
+                            tagID = t.tagID,
+                            tagName = t.tagName,
+                            tagImage = t.tagImage,
+                        }).ToList()
             };
 
             return Ok(docRes);
@@ -149,6 +161,7 @@ namespace SE.Controllers
                           };
             return Ok(docList.ToList());
         }
+
         // POST api/<DocumentController>
         [HttpPost]
         [Route("PostDocument")]
