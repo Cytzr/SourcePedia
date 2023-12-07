@@ -52,7 +52,7 @@ ON u.userID = d.userID
 INSERT INTO Tags(tagID, tagName, tagImage)
 VALUES(NEWID(), 'Health', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtqtgMhV3caIO87DflnP3GskvwiUMr0uBp1A&usqp=CAU'),
 (NEWID(), 'Tech', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6RHhJvsXrK_WJZIs9mxwfIHHB9nLsjKCQUo2HT9_S8tVgNv7SV5aYw-2PBOjGTVuSV48&usqp=CAU'),
-(NEWID(), 'Science', 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3432204/erlenmeyer-icon-md.png')
+(NEWID(), 'Science', 'https://static.vecteezy.com/system/resources/previews/000/550/979/original/dynamic-atom-molecule-science-symbol-vector-icon.jpg')
 
 --SELECT * FROM Tags
 
