@@ -44,7 +44,7 @@ export const useBackend = () => {
             password : props.password
         });
 
-        console.log(res);
+        // console.log(res);
 
         return res;
     }
@@ -56,7 +56,7 @@ export const useBackend = () => {
             content: props.content
         });
 
-        console.log(res);
+        // console.log(res);
 
         return res;
     }
@@ -71,13 +71,13 @@ export const useBackend = () => {
 
     async function FetchDocument () {
         const res = await axios.get("https://localhost:7124/api/Document/GetDocument");
-        console.log(res);
+        // console.log(res);
         return res;
     }
 
     async function FetchTag () {
         const res = await axios.get("https://localhost:7124/api/Tag");
-        console.log(res.data);
+        // console.log(res);
         return (res);
     }
 
@@ -99,5 +99,10 @@ export const useBackend = () => {
         return res;
     }
 
-return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag, FetchOneDocument, FetchDocumentByUser};
+    async function FetchAllDocument (){
+        const res = await axios.get('https://localhost:7124/api/Document/GetAllDocument');
+        return res;
+    }
+
+return {UseLogin, UseRegister, AddDocument, FetchDocument, FetchTag, AddTag, FetchDocumentByTag, FetchOneDocument, FetchDocumentByUser, FetchAllDocument};
 }   

@@ -1,8 +1,8 @@
 .content-container{
     height: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
+    justify-content: left;
     flex-wrap: wrap;
     flex-direction: column;
     padding: 2rem;
@@ -28,6 +28,16 @@
     text-decoration: none;
 }
 
-.content-image > image{
+.content-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-image > img{
     width: 50vw;
+}
+
+.published-time, .author-name{
+    font-size: 1rem;
 }

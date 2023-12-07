@@ -2,10 +2,17 @@ import { useEffect, useState } from "react"
 import "./Write.css"
 import { useBackend } from "../Custom Hooks/useBackend"
 import  axios from "axios"
+import { useLocalStorage } from "../Custom Hooks/useLocalStorage"
+import { useNavigate } from "react-router-dom"
 
 interface getTag {
     tagID: string,
     tagName: string
+}
+
+interface Credential {
+    userID: string,
+    userName: string,
 }
 
 export default function Write(){
@@ -13,10 +20,13 @@ export default function Write(){
     const { FetchTag, AddDocument, AddTag } = useBackend()
 
     const [tagList, SetTagList] = useState<getTag[]>([])
+    const { getItem } = useLocalStorage("UserCredential");
+    const cred = getItem();
 
     const [title, SetTitle] = useState("") // max 255
     const [tagSelected, SetTagSelected] = useState<string[]>([])
     const [content, SetContent] = useState("") // max 4000
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -54,7 +64,7 @@ export default function Write(){
         } else { // send data
             
             const sendDocument = await AddDocument({
-                userID: "B1C14FD5-68CB-4181-BC6D-0777BF19D540", // mesti diganti nanti
+                userID: cred.userID, // mesti diganti nanti
                 title: title,
                 content: content,
             })
@@ -67,7 +77,6 @@ export default function Write(){
             // ngejalanin semua request sekaligus
             axios.all(request)
                 .then((response) => console.log(response))
-
         }
 
     }

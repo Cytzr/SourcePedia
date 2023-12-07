@@ -15,19 +15,27 @@ interface getTag {
     tagName: string
 }
 
+type Tag = {
+    tagID: string,
+    tagName: string,
+    tagImage : string,
+}
+
 interface getDoc {
-    content: string,
     documentID: string,
-    publishedTime: string,
-    title: string,
     userID: string,
+    userName: string,
+    title: string,
+    content: string,
+    publishedTime: string,
+    tag: Tag[],
 }
 
 export default function Main() {
 
     const navigate = useNavigate()
 
-    const { FetchTag, FetchDocument, FetchDocumentByTag } = useBackend()
+    const { FetchTag, FetchDocumentByTag, FetchAllDocument } = useBackend()
 
     const [tagList, SetTagList] = useState<getTag[]>([]);
     const [postList, SetPostList] = useState<getDoc[]>([]);
@@ -38,7 +46,7 @@ export default function Main() {
             const tagRes = await FetchTag()
             SetTagList(tagRes.data)
 
-            const docRes = await FetchDocument()
+            const docRes = await FetchAllDocument()
             SetPostList(docRes.data)
         }
         fetchTagAndDocument()
@@ -74,7 +82,7 @@ export default function Main() {
                 alert("No Available with designated tag")
             }
         } else { // gada tag yang dipilih (ngambil semua document)
-            const docRes = await FetchDocument()
+            const docRes = await FetchAllDocument()
             SetPostList(docRes.data)
         }
 
@@ -122,7 +130,14 @@ export default function Main() {
                                     <div className="post-text">
                                         <p className="post-title">{post.title}</p>
                                         <p className="post-content">{post.content}</p>
-                                        <p className="post-published-time">{post.publishedTime.slice(0, 10)}</p>
+                                        <div className="post-published-time"><p>{post.publishedTime.slice(0, 10)}</p><p>Written by {post.userName}</p></div>
+                                    </div>
+                                    <div className="tag-list-div">
+                                            {post.tag.map((tag, id) =>{
+                                                return (
+                                                    <img src={tag.tagImage}></img>
+                                                );
+                                            })}
                                     </div>
                                 </div>
                             </div>

@@ -1,18 +1,33 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import './User.css'
 import { useBackend } from '../Custom Hooks/useBackend';
 import { useEffect, useState } from 'react';
 
-type getDoc = {
-    content: string,
-    documentID: string,
-    publishedTime: string,
-    title: string,
-    userID: string,
-    userName: string,
+import img1 from "../Resources/img1.jpg"
+import img2 from "../Resources/img2.jpg"
+import img3 from "../Resources/img3.jpg"
+import img4 from "../Resources/img4.jpg"
+import img5 from "../Resources/img5.jpg"
+
+type Tag = {
+    tagID: string,
+    tagName: string,
+    tagImage : string,
 }
 
+interface getDoc {
+    documentID: string,
+    userID: string,
+    userName: string,
+    title: string,
+    content: string,
+    publishedTime: string,
+    tag: Tag[],
+}
+
+
 export const User = () =>{
+    const navigate = useNavigate();
     const { userID } = useParams<string>();
     const { FetchDocumentByUser } = useBackend();
     const [data, setData] = useState<getDoc[]>([]);
@@ -34,13 +49,26 @@ export const User = () =>{
                 <div className="post-list-div">
                     {data.map((post, id) => {
                         return (
-                            <div className="post-overview">
-                                <Link to={`/read/${post.documentID}`}>
-                                    <div key={id}>
-                                        <p>{post.title}</p>
-                                        <p>{post.publishedTime.slice(0, 10)}</p>
+                            <div className="post-overview" onClick={() => navigate(`/read/${post.documentID}/${id}`)}>
+                                <div key={id}>
+                                    {id % 5 === 0 && <img src={img1} alt="" />}
+                                    {id % 5 === 1 && <img src={img2} alt="" />}
+                                    {id % 5 === 2 && <img src={img3} alt="" />}
+                                    {id % 5 === 3 && <img src={img4} alt="" />}
+                                    {id % 5 === 4 && <img src={img5} alt="" />}
+                                    <div className="post-text">
+                                        <p className="post-title">{post.title}</p>
+                                        <p className="post-content">{post.content}</p>
+                                        <p className="post-published-time">{post.publishedTime.slice(0, 10)}</p>
                                     </div>
-                                </Link>
+                                    <div className="tag-list-div">
+                                            {post.tag.map((tag, id) =>{
+                                                return (
+                                                    <img src={tag.tagImage}></img>
+                                                );
+                                            })}
+                                    </div>
+                                </div>
                             </div>
                         )
                     })}

@@ -175,6 +175,16 @@
     overflow: hidden;
 }
 
+.tag-list-div{
+    align-items: right;
+    justify-content: right;
+}
+
+.tag-list-div > img {
+    height: 2rem;
+    width: 2rem;
+}
+
 .post-published-time {
     position: absolute;
     bottom: 0;
@@ -190,7 +200,7 @@
     }
 }
 
-@media (max-width: 70rem){
+@media (max-width: 90rem){
     .post-list-div {
         margin-top: 0.5rem;
         width: 100%;

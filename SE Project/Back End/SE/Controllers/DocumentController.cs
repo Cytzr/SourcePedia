@@ -110,17 +110,37 @@ namespace SE.Controllers
             {
                 return NotFound("User Not Found");
             };
-            var docList = _context.Documents
+            var docList = _context.Users
                 .Where(d => d.userID == user.userID)
-                .Select(d => new DocumentResponse
-                {
-                    documentID = d.documentID,
-                    userID = d.userID,
-                    userName = user.name,
-                    title = d.title,
-                    content = d.content,
-                    publishedTime = d.publishedTime
-                });
+                .SelectMany(u => u.Documents
+                            .SelectMany(d => d.DocumentsTag
+                                .Select(dt => new DocumentResponse
+                                {
+                                    userID = u.userID,
+                                    userName = u.name,
+                                    documentID = d.documentID,
+                                    title = d.title,
+                                    content = d.content,
+                                    publishedTime = d.publishedTime,
+                                    tag = d.DocumentsTag
+                                    .Select(dt => new TagResponse
+                                    {
+                                        tagName = dt.Tag.tagName,
+                                        tagID = dt.Tag.tagID,
+                                        tagImage = dt.Tag.tagImage
+                                    }).ToList()
+                                })
+                            )
+                        );
+            //.Select(d => new DocumentResponse
+            //{
+            //    documentID = d.documentID,
+            //    userID = d.userID,
+            //    userName = user.name,
+            //    title = d.title,
+            //    content = d.content,
+            //    publishedTime = d.publishedTime
+            //});
             return Ok(docList.ToList());
         }
         // POST api/<DocumentController>

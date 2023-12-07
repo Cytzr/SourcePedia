@@ -25,8 +25,6 @@ export const Content = () =>{
     const { FetchOneDocument } = useBackend();
     const [data, setData] = useState<getDoc>();
     const id = eval(`${imageID}%5`);
-    console.log(id);
-
     useEffect(() => {
         const getData = async() =>{
             const data = await FetchOneDocument(documentID);
@@ -41,7 +39,7 @@ export const Content = () =>{
             <div className='header'>
                 <div className='content-title'>{data?.title}</div>
                 <div className="published-time">Published on: {data?.publishedTime.slice(0, 10)}</div>
-                <Link to={`/user/${data?.userID}`}><div className="author-name">by {data?.userName}</div></Link>
+                <Link to={`/user/${data?.userID}`} style={{textDecoration:'none', color:'black'}}><div className="author-name">Written by {data?.userName}</div></Link>
             </div>
             <div className='content-image'>
                 {id % 5 === 0 && <img src={img1} alt="" />}
