@@ -115,7 +115,6 @@ export default function Main() {
                     </div>
                 </div>
             </div>
-
             <div className="post-list-div-container">
                 <div className="post-list-div">
                     {postList.map((post, id) => {
@@ -130,7 +129,7 @@ export default function Main() {
                                     <div className="post-text">
                                         <p className="post-title">{post.title}</p>
                                         <p className="post-content">{post.content}</p>
-                                        <div className="post-published-time"><p>{post.publishedTime.slice(0, 10)}</p><p>Written by {post.userName}</p></div>
+                                        <div className="post-published-time"><p><b>{post.publishedTime.slice(0, 10)}</b></p><p><b>Written by {post.userName}</b></p></div>
                                     </div>
                                     <div className="tag-list-div">
                                             {post.tag.map((tag, id) =>{

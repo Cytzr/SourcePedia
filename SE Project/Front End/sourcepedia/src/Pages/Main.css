@@ -190,6 +190,10 @@
     bottom: 0;
 }
 
+.post-published-time > p{
+    font-size: 0.7rem;
+}
+
 @media (max-width: 48rem) {
     .main-header {
         flex-direction: column;

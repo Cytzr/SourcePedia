@@ -59,7 +59,7 @@ export const User = () =>{
                                     <div className="post-text">
                                         <p className="post-title">{post.title}</p>
                                         <p className="post-content">{post.content}</p>
-                                        <p className="post-published-time">{post.publishedTime.slice(0, 10)}</p>
+                                        <p className="post-published-time"><b>{post.publishedTime.slice(0, 10)}</b></p>
                                     </div>
                                     <div className="tag-list-div">
                                             {post.tag.map((tag, id) =>{
