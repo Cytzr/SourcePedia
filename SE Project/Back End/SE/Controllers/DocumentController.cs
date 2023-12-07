@@ -22,33 +22,42 @@ namespace SE.Controllers
         // GET: api/<DocumentController>
         [HttpGet]
         [Route("GetAllDocument")]
-        public ActionResult<DocumentResponse> GetAllDocument()
+        public ActionResult<List<DocumentResponse>> GetAllDocument()
         {
-            var docList = _context.Users
-                        .SelectMany(u => u.Documents
-                            .SelectMany(d => d.DocumentsTag
-                                .Select(dt => new DocumentResponse
-                                {
-                                    userID = u.userID,
-                                    userName = u.name,
-                                    documentID = d.documentID,
-                                    title = d.title,
-                                    content = d.content,
-                                    publishedTime = d.publishedTime,
-                                    tag = d.DocumentsTag
-                                    .Select(dt => new TagResponse
-                                    {
-                                        tagName = dt.Tag.tagName,
-                                        tagID = dt.Tag.tagID,
-                                        tagImage = dt.Tag.tagImage
-                                    }).ToList()
-                                })
-                            )
-                        );
-            if (docList == null)
+            var docList = from user in _context.Users
+                          join document in _context.Documents on user.userID equals document.userID
+                          join docTag in _context.DocumentsTags on document.documentID equals docTag.documentID
+                          join tag in _context.Tags on docTag.tagID equals tag.tagID
+                          group tag by new
+                          {
+                              user.userID,
+                              user.name,
+                              document.documentID,
+                              document.title,
+                              document.content,
+                              document.publishedTime
+                          } into groupedDocumentTags
+                          select new DocumentResponse
+                          {
+                              userID = groupedDocumentTags.Key.userID,
+                              userName = groupedDocumentTags.Key.name,
+                              documentID = groupedDocumentTags.Key.documentID,
+                              title = groupedDocumentTags.Key.title,
+                              content = groupedDocumentTags.Key.content,
+                              publishedTime = groupedDocumentTags.Key.publishedTime,
+                              tag = groupedDocumentTags.Select(t => new TagResponse
+                              {
+                                  tagID = t.tagID,
+                                  tagName = t.tagName,
+                                  tagImage = t.tagImage
+                              }).ToList()
+                          };
+
+            if (!docList.Any())
             {
                 return NotFound("There is no document");
             }
+
             return Ok(docList.ToList());
         }
 
@@ -110,37 +119,34 @@ namespace SE.Controllers
             {
                 return NotFound("User Not Found");
             };
-            var docList = _context.Users
-                .Where(d => d.userID == user.userID)
-                .SelectMany(u => u.Documents
-                            .SelectMany(d => d.DocumentsTag
-                                .Select(dt => new DocumentResponse
-                                {
-                                    userID = u.userID,
-                                    userName = u.name,
-                                    documentID = d.documentID,
-                                    title = d.title,
-                                    content = d.content,
-                                    publishedTime = d.publishedTime,
-                                    tag = d.DocumentsTag
-                                    .Select(dt => new TagResponse
-                                    {
-                                        tagName = dt.Tag.tagName,
-                                        tagID = dt.Tag.tagID,
-                                        tagImage = dt.Tag.tagImage
-                                    }).ToList()
-                                })
-                            )
-                        );
-            //.Select(d => new DocumentResponse
-            //{
-            //    documentID = d.documentID,
-            //    userID = d.userID,
-            //    userName = user.name,
-            //    title = d.title,
-            //    content = d.content,
-            //    publishedTime = d.publishedTime
-            //});
+            var docList = from doc in _context.Documents
+                          join docTag in _context.DocumentsTags on doc.documentID equals docTag.documentID
+                          join tag in _context.Tags on docTag.tagID equals tag.tagID
+                          where doc.userID == user.userID
+                          group tag by new
+                          {
+                              user.userID,
+                              user.name,
+                              doc.documentID,
+                              doc.title,
+                              doc.content,
+                              doc.publishedTime
+                          } into groupedDocumentTags
+                          select new DocumentResponse
+                          {
+                              userID = groupedDocumentTags.Key.userID,
+                              userName = groupedDocumentTags.Key.name,
+                              documentID = groupedDocumentTags.Key.documentID,
+                              title = groupedDocumentTags.Key.title,
+                              content = groupedDocumentTags.Key.content,
+                              publishedTime = groupedDocumentTags.Key.publishedTime,
+                              tag = groupedDocumentTags.Select(t => new TagResponse
+                              {
+                                  tagID = t.tagID,
+                                  tagName = t.tagName,
+                                  tagImage = t.tagImage
+                              }).ToList()
+                          };
             return Ok(docList.ToList());
         }
         // POST api/<DocumentController>
