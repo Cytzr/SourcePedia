@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css"; // Import Font Awesome CSS
 import "./Footer.css";
 
@@ -12,13 +13,13 @@ export const Footer: React.FC = () => {
         <div className="footer-social">
           <ul>
             <li>
-              <i className="fab fa-instagram"></i>
+              <Link to="https://instagram.com" target="_blank"><i className="fab fa-instagram"></i></Link>
             </li>
             <li>
-              <i className="fab fa-facebook"></i>
+              <Link to="https://facebook.com" target="_blank"><i className="fab fa-facebook"></i></Link>
             </li>
             <li>
-              <i className="fab fa-twitter"></i>
+              <Link to="https://twitter.com" target="_blank"><i className="fab fa-twitter"></i></Link>
             </li>
           </ul>
         </div>

@@ -20,7 +20,7 @@ export default function Write(){
     const { FetchTag, AddDocument, AddTag } = useBackend()
 
     const [tagList, SetTagList] = useState<getTag[]>([])
-    const { getItem } = useLocalStorage("UserCredential");
+    const { setItem, getItem } = useLocalStorage("UserCredential");
     const cred = getItem();
 
     const [title, SetTitle] = useState("") // max 255
@@ -56,29 +56,41 @@ export default function Write(){
 
     const formSubmitted = async (event: React.FormEvent<HTMLFormElement>) => {
 
-        event.preventDefault()
-
-        if(tagSelected.length === 0){
+        if(cred) {
             event.preventDefault()
-            alert("Please select at least one tag")
-        } else { // send data
-            
-            const sendDocument = await AddDocument({
-                userID: cred.userID, // mesti diganti nanti
-                title: title,
-                content: content,
-            })
 
-            const request = tagSelected.map((tag) => AddTag({
-                documentID: sendDocument.data,
-                tagID: tag,
-            }))
+            if(tagSelected.length === 0){
+                event.preventDefault()
+                alert("Please select at least one tag")
+            } else { // send data
+                
+                const sendDocument = await AddDocument({
+                    userID: cred.userID, // mesti diganti nanti
+                    title: title,
+                    content: content,
+                })
 
-            // ngejalanin semua request sekaligus
-            axios.all(request)
-                .then((response) => console.log(response))
+                const request = tagSelected.map((tag) => AddTag({
+                    documentID: sendDocument.data,
+                    tagID: tag,
+                }))
+
+                // ngejalanin semua request sekaligus
+                axios.all(request)
+                    .then((response) => {
+                        if(response[0].status === 200){
+                            alert("Post success")
+                            navigate(`/user/${cred.userID}`)
+                        } else {
+                            alert("Post failed")
+                        }
+                    })
+
+                
+            }
+        } else {
+            navigate("/login")
         }
-
     }
 
     return (
